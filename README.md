@@ -1,6 +1,6 @@
-#Low-level programming & Algorithm - Hatching out
+# Low-level programming & Algorithm - Hatching out
 
-##About low level programming projects:
+#### Content:
 
 0x00-hello_world: Compilate C programs and print messages with C.
 0x01-variables_if_else_while project: Use of if else and loop stataments.
