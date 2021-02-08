@@ -14,6 +14,7 @@ int main(void)
 	int z;
 	int y;
 	int x;
+
 	n = 48;
 	m = 48;
 	o = 48;
@@ -27,17 +28,13 @@ int main(void)
 		{
 			for (y = 48; y <= 57; y = y + 1)
 			{
-				if ((z != y) && (y != x))
+				if ((z < y) && (y < x) && (z < x))
 				{
-					if ((z < y) && (y < x) && (z < x))
+					putchar(z);
+					putchar(y);
+					putchar(x);
+					if (z != 55 || y != 56 || x != 57)
 					{
-						putchar(z);
-						putchar(y);
-						putchar(x);
-						if (z == 55 && y == 56 && x == 57)
-						{
-							continue;
-						}
 						putchar(',');
 						putchar(' ');
 					}
@@ -45,6 +42,6 @@ int main(void)
 			}
 		}
 	}
-		putchar('\n');
-		return (0);
+	putchar('\n');
+	return (0);
 }
