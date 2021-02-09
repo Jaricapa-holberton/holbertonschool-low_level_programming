@@ -7,12 +7,15 @@
 
 int main(void)
 {
-	int c;
-	char array[11] = "Holberton\n";
-
-	for (c = 0; c <= 11; c++)
-	{
-		_putchar(array[c]);
-	}
+	_putchar('H');
+	_putchar('o');
+	_putchar('l');
+	_putchar('b');
+	_putchar('e');
+	_putchar('r');
+	_putchar('t');
+	_putchar('o');
+	_putchar('n');
+	_putchar('\n');
 	return (0);
 }
