@@ -5,25 +5,23 @@
  * Return: void
  */
 void jack_bauer(void)
-	{
-		int p, o, n, m;
+{
+	int hour;
+	int minute;
 
-		for (p = 48; p <= 50; p++)
+	for (hour = 0; hour < 24; hour++)
+	{
+		for (minute = 0; minute < 60; minute++)
 		{
-			for (o = 48; o <= 51; o++)
-			{
-				for (n = 48; n <= 53; n++)
-				{
-					for (m = 48; m <= 57; m++)
-					{
-						_putchar(p);
-						_putchar(o);
-						_putchar(':');
-						_putchar(n);
-						_putchar(m);
-						_putchar('\n');
-					}
-				}
-			}
+			_putchar((hour / 10) + '0');
+			_putchar((hour % 10) + '0');
+			_putchar(':');
+			_putchar((minute / 10) + '0');
+			_putchar((minute % 10) + '0');
+			_putchar('\n');
+
 		}
+
 	}
+
+}
