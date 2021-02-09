@@ -1,7 +1,7 @@
 #include "holberton.h"
 /**
- * _isalpha = function that checks for alphabetic character
- * c = get a letter
+ * _isalpha - function that checks for alphabetic character
+ * @c: get a letter
  * Return: return balblabva
  */
 int _isalpha(int c)
