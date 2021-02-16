@@ -9,12 +9,14 @@ void puts_half(char *str)
 {
 	int b, c;
 
-	for (b = 0; str[b] != 0; b++)
+	b = 0;
+	while (str[b] != 0)
 	{
+		b++;
 	}
 	if ((b % 2) == 0)
 	{
-		c = b / 2;
+		c = (b / 2);
 		while (c <= b)
 		{
 			_putchar(*(str + c));
@@ -25,9 +27,10 @@ void puts_half(char *str)
 	else
 	{
 		c = (b - 1) / 2;
+		c = b - c;
 		while (c <= b)
 		{
-			_putchar(*str + c);
+			_putchar(*(str + c));
 			c++;
 		}
 		_putchar('\n');
