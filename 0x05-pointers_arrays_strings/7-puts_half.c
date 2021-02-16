@@ -10,29 +10,17 @@ void puts_half(char *str)
 	int b, c;
 
 	b = 0;
-	while (str[b] != 0)
+	while (*str != '\0')
 	{
+		str++;
 		b++;
 	}
-	if ((b % 2) == 0)
+	c = (b / 2);
+	c = b - c;
+	while (*(str - c) != '\0')
 	{
-		c = (b / 2);
-		while (c <= b)
-		{
-			_putchar(*(str + c));
-			c++;
-		}
-		_putchar('\n');
+		_putchar(*(str - c));
+		c--;
 	}
-	else
-	{
-		c = (b - 1) / 2;
-		c = b - c;
-		while (c <= b)
-		{
-			_putchar(*(str + c));
-			c++;
-		}
-		_putchar('\n');
-	}
+	_putchar('\n');
 }
