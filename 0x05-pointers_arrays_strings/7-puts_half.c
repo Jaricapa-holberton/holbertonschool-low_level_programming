@@ -1,6 +1,6 @@
 #include "holberton.h"
 /**
- * puts_half -  prints half of a 
+ * puts_half - prints half of a
  * string, followed by a new line
  * @str: get a string
  * Return: return void
