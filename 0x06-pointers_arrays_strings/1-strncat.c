@@ -21,13 +21,13 @@ int length(char *dest)
 
 char *_strncat(char *dest, char *src, int n)
 {
-	int i, log = length(dest);
+	int i;
+	const unsigned int log = length(dest);
 	/* char *first = dest; */
 
-	for (i = log; (i - log) < n && *(dest + i) != '\0'; src++)
+	for (i = 0; i < n; i++)
 	{
-		*(dest + i) = *src;
+		*(dest + log + i) = *(src + i);
 	}
-	*(dest + i) = *src;
 	return (dest);
 }
