@@ -11,6 +11,7 @@
 char *_strncpy(char *dest, char *src, int n)
 {
 	int i;
+	int j;
 
 	i = 0;
 	while (*src != '\0' && i < n)
@@ -20,7 +21,11 @@ char *_strncpy(char *dest, char *src, int n)
 		src++;
 		i++;
 	}
-	*dest = '\0';
-	dest = dest - i;
+	for (j = i; j < n; j++)
+	{
+		*dest = '\0';
+		dest++;
+	}
+	dest = dest - j;
 	return (dest);
 }
