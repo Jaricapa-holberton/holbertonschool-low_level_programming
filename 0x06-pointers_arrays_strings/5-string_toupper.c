@@ -1,35 +1,19 @@
 #include "holberton.h"
 /**
- * main - function main balblabla
- * @var1: balbla
- * @var2: balblab
- *
- * Return: return balblabva
+ * string_toupper - changes all lowercase letters of a string to uppercase
+ * @s: get a string
+ * Return: return the string
  */
 char *string_toupper(char *s)
 {
 	int i;
-	
-	for (i = 0; *s != '\0'; s++)
+
+	i = 0;
+	while (s[i] != '\0')
 	{
-		if (*s == '\0')
+		if (s[i] >= 97 && s[i] <= 122)
 		{
-			continue;
-		}
-		else
-		{
-			if((*s >= 97) && (*s <= 122))
-			{
-				s = s - 32;
-			}
-			else if ((*s >= 65) && (*s <= 90))
-			{
-				continue;
-			}
-			else
-			{
-				continue;
-			}
+			s[i] = s[i] - 32;
 		}
 		i++;
 	}
