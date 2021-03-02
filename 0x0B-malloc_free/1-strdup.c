@@ -58,5 +58,5 @@ char *_strdup(char *str)
 		output = (char *) _memcpy(output, str, len);
 		return (output);
 	}
-	free (output);
+	free(output);
 }
