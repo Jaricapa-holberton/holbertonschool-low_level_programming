@@ -85,13 +85,21 @@ char *str_concat(char *s1, char *s2)
 	int len1, len2;
 	char *output;
 
+	if (s1 == NULL)
+	{
+		s1 = "";
+	}
+	if (s2 == NULL)
+	{
+		s2 = "";
+	}
 	/* contar espacios del string salida y crearlo */
 	len1 = _strlen(s1);
 	len2 = _strlen(s2);
 	output = malloc(sizeof(char) * ((len1 + 1) + (len2)));
 	/* escribir las cadenas en el string salida */
 	/* strcpy copia el string s1 en output */
-	if (s1 == NULL || s2 == NULL)
+	if (output == NULL)
 	{
 		return (NULL);
 	}
