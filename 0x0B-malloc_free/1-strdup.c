@@ -16,23 +16,6 @@ int _strlen(char *s)
 	return (largo);
 }
 /**
- * _memcpy - copies memory area
- * @dest: get a string
- * @src: get a string
- * @n: get a number
- * Return: return a pointer to dest
- */
-char *_memcpy(char *dest, char *src, unsigned int n)
-{
-	unsigned int i;
-
-	for (i = 0; i < n; i++)
-	{
-		dest[i] = src[i];
-	}
-	return (dest);
-}
-/**
  * _strdup - returns a pointer to a newly allocated space in memory,
  * which contains a copy of the string given as a parameter
  * @str: get a string
@@ -40,19 +23,20 @@ char *_memcpy(char *dest, char *src, unsigned int n)
  */
 char *_strdup(char *str)
 {
-	int len;
-	char *output;
-	
-	len = _strlen(str) + 1;
-	output = (char *) malloc((len + 1) * sizeof(char));
-	if (*str == '\0')
-	{
+	unsigned int i, size;
+	char *dup;
+
+	if (str == NULL)
 		return (NULL);
-	}
-	else
-	{
-		output = (char *) _memcpy(output, str, len);
-		return (output);
-	}
-	free(output);
+
+	size = _strlen(str);
+	dup = malloc(sizeof(char) * (size + 1));
+
+	if (dup == NULL)
+		return (NULL);
+
+	for (i = 0; str[i]; i++)
+		dup[i] = str[i];
+
+	return (dup);
 }
