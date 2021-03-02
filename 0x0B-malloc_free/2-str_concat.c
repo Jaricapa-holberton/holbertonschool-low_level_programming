@@ -85,6 +85,7 @@ char *str_concat(char *s1, char *s2)
 	int len1, len2;
 	char *output;
 
+	/* volver strings vacios a los strings si son nulos */
 	if (s1 == NULL)
 	{
 		s1 = "";
