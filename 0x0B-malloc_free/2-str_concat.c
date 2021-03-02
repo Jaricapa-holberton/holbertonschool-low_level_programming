@@ -82,12 +82,25 @@ char *_strcat(char *dest, char *src)
  */
 char *str_concat(char *s1, char *s2)
 {
-	int len;
+	int len1, len2;
 	char *output;
 
-	len = _strlen(s1);
-	output = malloc(sizeof(char) * 2 * (len + 1));
-	output = _strcpy(output, s1);
-	output = _strcat(output, s2);
-	return (output);
+	/* contar espacios del string salida y crearlo */
+	len1 = _strlen(s1);
+	len2 = _strlen(s2);
+	output = malloc(sizeof(char) * ((len1 + 1) + (len2)));
+	/* escribir las cadenas en el string salida */
+	/* strcpy copia el string s1 en output */
+	if (s1 == NULL || s2 == NULL)
+	{
+		return (NULL);
+	}
+	else
+	{
+		output = _strcpy(output, s1);
+		/* strcat une lo copiado en output con s2 */
+		output = _strcat(output, s2);
+		return (output);
+	}
+
 }
