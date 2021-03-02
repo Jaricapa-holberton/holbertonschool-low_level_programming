@@ -23,20 +23,23 @@ int _strlen(char *s)
  */
 char *_strdup(char *str)
 {
-	unsigned int i, size;
-	char *dup;
+	unsigned int i, len;
+	char *output;
 
 	if (str == NULL)
+	{
 		return (NULL);
+	}
+	len = _strlen(str);
+	output = malloc(sizeof(char) * (len + 1));
 
-	size = _strlen(str);
-	dup = malloc(sizeof(char) * (size + 1));
-
-	if (dup == NULL)
+	if (output == NULL)
+	{
 		return (NULL);
-
+	}
 	for (i = 0; str[i]; i++)
-		dup[i] = str[i];
-
-	return (dup);
+	{
+		output[i] = str[i];
+	}
+	return (output);
 }
