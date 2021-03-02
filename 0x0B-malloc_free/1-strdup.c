@@ -43,6 +43,10 @@ char *_strdup(char *str)
 	int len;
 	char *output;
 
+	if (*str == '\0')
+	{
+		return (NULL);
+	}
 	len = _strlen(str) + 1;
 	output = (char *) malloc((len + 1) * sizeof(char));
 	if (output == NULL)
@@ -54,4 +58,5 @@ char *_strdup(char *str)
 		output = (char *) _memcpy(output, str, len);
 		return (output);
 	}
+	free (output);
 }
