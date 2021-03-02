@@ -43,12 +43,12 @@ char *_strdup(char *str)
 	int len;
 	char *output;
 
+	len = _strlen(str) + 1;
+	output = (char *) malloc((len + 1) * sizeof(char));
 	if (*str == '\0')
 	{
 		return (NULL);
 	}
-	len = _strlen(str) + 1;
-	output = (char *) malloc((len + 1) * sizeof(char));
 	if (output == NULL)
 	{
 		return (NULL);
