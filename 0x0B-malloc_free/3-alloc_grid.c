@@ -7,41 +7,36 @@
  */
 int **alloc_grid(int width, int height)
 {
-	int L, C;
-
+	int l, c;
 	int **p;
 
+	l = c = 0;
+	p = NULL;
+
 	if (width <= 0 || height <= 0)
-	{
 		return (NULL);
-	}
-	/*Create a pointer to pointer rows*/
-	p = (int **) malloc(height * sizeof(int *));
+
+	p = malloc(sizeof(int *) * height);
 
 	if (p == NULL)
-	{
 		return (NULL);
-	}
-	/*For each row create a pointer to each element*/
-	for (L = 0; L < height; L++)
-	{
-		p[L] = (int *)malloc(width * sizeof(int));
 
-		if (p[L] == NULL)
+	for (l = 0; l < height; l++)
+	{
+		p[l] = malloc(sizeof(int) * width);
+
+		if (p[l] == NULL)
 		{
-			for (; L >= 0; L--)
-			{
-				free(p[L]);				
-			}
-			free(p[L]);
+			for (p[l] -= 1; l >= 0; l--)
+				free(p[l]);
+			free(p);
 			return (NULL);
 		}
 	}
-	/*Fill the array*/
-	for (L = 0; L < height; L++)
-	{
-		for (C = 0; C < width; C++)
-			p[L][C] = 0;
-	}
+
+	for (l = 0; l < height; l++)
+		for (c = 0; c < width; c++)
+			p[l][c] = 0;
+
 	return (p);
 }
