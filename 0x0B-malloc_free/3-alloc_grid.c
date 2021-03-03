@@ -26,7 +26,7 @@ int **alloc_grid(int width, int height)
 		p[fil] = (int *) malloc(sizeof(int) * width);
 		if (p[fil] == NULL)
 		{
-			for (col = fil - 1; col >= 0; col--)
+			for (; col >= 0; col--)
 			{
 				free(p[fil]);
 			}
