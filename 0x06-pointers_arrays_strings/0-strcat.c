@@ -1,35 +1,19 @@
 #include "holberton.h"
 
 /**
- * length - count the array spaces
- * @dest: get a pointer
- * Return: return count
+ * *_strcat - Concatenate two strings
+ * @dest: Destiny string.
+ * @src: Source string.
+ * Return: Destiny sgring dest.
  */
-
-int length(char *dest)
-{
-	return ((*dest != '\0') ? 1 + length(dest + 1) : 0);
-}
-
-/**
- * _strcat - concatenates two strings
- * @dest: get a pointer
- * @src: get a pointer
- * Return: return dest
- */
-
 char *_strcat(char *dest, char *src)
 {
-	char *iterdest;
+	int index, size;
 
-	iterdest = dest + length(dest);
-
-	while (*src != '\0')
-	{
-		*iterdest = *src;
-		src++;
-		iterdest++;
-	}
-	*iterdest = *src;
+	for (size = 0; dest[size] != '\0'; size++)
+		;
+	for (index = size; src[index - size] != '\0'; index++)
+		dest[index] = src[index - size];
+	dest[index] = '\0';
 	return (dest);
 }
