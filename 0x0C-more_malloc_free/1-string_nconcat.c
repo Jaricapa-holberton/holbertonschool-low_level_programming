@@ -13,11 +13,11 @@ int _strlen(char *s)
 		largo++;
 		s++;
 
-		
+
 	}
 	return (largo);
 
-	
+
 }
 /**
  * _strcpy - copies the string pointed to
@@ -38,12 +38,12 @@ char *_strcpy(char *dest, char *src)
 		dest++;
 		src++;
 		i++;
-		
+
 	}
 	*dest = '\0';
 	dest = dest - i;
 	return (dest);
-	
+
 }
 /**
  * length - count length of a string
@@ -55,31 +55,31 @@ int length(char *dest)
 {
 	return ((*dest != '\0') ? 1 + length(dest + 1) : 0);
 
-	
+
 }
 /**
- * _strcat - concatenates two strings
+ * _strcatmod - concatenates two strings
  * @dest: get a pointer
  * @src: get a pointer
  * Return: return dest
  */
-char *_strcat(char *dest, char *src)
+char *_strcatmod(char *dest, char *src)
 {
 	char *iterdest;
 
 	iterdest = dest + length(dest);
 
-	while (*src != '\0')
+	while (*src != ' ')
 	{
 		*iterdest = *src;
 		src++;
 		iterdest++;
 
-		
+
 	}
-	*iterdest = *src;
+	*iterdest = '\0';
 	return (dest);
-	
+
 }
 /**
  * string_nconcat - concatenates two strings,
@@ -99,29 +99,20 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	len1 = _strlen(s1);
 	/* lo mismo con s2, pero solo hasta donde diga n */
 	/* una version modificada de strlen hasta donde diga n */
-	unsigned int largo = 0;
-
-	while (largo < n)
-	{
-		largo++;
-		s2++;
-
-		
-	}
-	len2 = largo;
+	len2 = n;
 	output = malloc(sizeof(char) * ((len1 + 1) + (len2)));
 	/* escribir las cadenas en el string salida */
 	/* strcpy copia el string s1 en output */
 	if (output == NULL)
 	{
 		return (NULL);
-		
+
 	}
 	else
 	{
 		output = _strcpy(output, s1);
 		/* strcat une lo copiado en output con s2 */
-		output = _strcat(output, s2);
+		output = _strcatmod(output, s2);
 		return (output);
 	}
 }
