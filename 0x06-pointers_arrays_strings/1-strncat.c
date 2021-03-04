@@ -1,33 +1,23 @@
+  
 #include "holberton.h"
 
 /**
- * length - count length of a string
- * @dest: get a string
- * Return: return the count
+ * *_strncat - Concatenate two strings
+ * @dest: Destiny string.
+ * @src: Source string.
+ * @n: Bytes from src string.
+ * Return: Destiny string dest.
  */
-
-int length(char *dest)
-{
-	return ((*dest != '\0') ? 1 + length(dest + 1) : 0);
-}
-
-/**
- * _strncat - concatenates two strings
- * @dest: get a pointer
- * @src: get a pointer
- * @n: get a number
- * Return: return dest
- */
-
 char *_strncat(char *dest, char *src, int n)
 {
-	int i;
-	const unsigned int log = length(dest);
-	/* char *first = dest; */
+	int index, size;
 
-	for (i = 0; i < n; i++)
-	{
-		*(dest + log + i) = *(src + i);
-	}
+	for (size = 0; dest[size] != '\0'; size++)
+		;
+	for (index = size;
+	     n > 0 && src[index - size] != '\0';
+	     index++, n--)
+		dest[index] = src[index - size];
+	dest[index] = '\0';
 	return (dest);
 }
