@@ -19,68 +19,7 @@ int _strlen(char *s)
 
 
 }
-/**
- * _strcpy - copies the string pointed to
- * by src, including the terminating null
- * byte (\0), to the buffer pointed to by dest
- * @dest: get a array
- * @src: get a array
- * Return: return dest
- */
-char *_strcpy(char *dest, char *src)
-{
-	int i;
 
-	i = 0;
-	while (*src != '\0')
-	{
-		*dest = *src;
-		dest++;
-		src++;
-		i++;
-
-	}
-	*dest = '\0';
-	dest = dest - i;
-	return (dest);
-
-}
-/**
- * length - count length of a string
- * @dest: get a string
- * Return: return the count
- */
-
-int length(char *dest)
-{
-	return ((*dest != '\0') ? 1 + length(dest + 1) : 0);
-
-
-}
-/**
- * _strcatmod - concatenates two strings
- * @dest: get a pointer
- * @src: get a pointer
- * Return: return dest
- */
-char *_strcatmod(char *dest, char *src)
-{
-	char *iterdest;
-
-	iterdest = dest + length(dest);
-
-	while (*src != ' ')
-	{
-		*iterdest = *src;
-		src++;
-		iterdest++;
-
-
-	}
-	*iterdest = '\0';
-	return (dest);
-
-}
 /**
  * string_nconcat - concatenates two strings,
  * but only n bytes of the second string
@@ -91,28 +30,40 @@ char *_strcatmod(char *dest, char *src)
  */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	int len1, len2;
-	char *output;
+	char *lenTotal = NULL;
+	unsigned int len1, len2, i, j;
 
-	/* contar espacios del string salida y crearlo */
-	/* primero, contar los espacios de s1 */
+	/*Convert null strings to empty string*/
+	if (s1 == NULL)
+		s1 = "";
+	if (s2 == NULL)
+		s2 = "";
+
+	/*Allocate memory*/
 	len1 = _strlen(s1);
-	/* lo mismo con s2, pero solo hasta donde diga n */
-	/* una version modificada de strlen hasta donde diga n */
-	len2 = n;
-	output = malloc(sizeof(char) * ((len1 + 1) + (len2)));
-	/* escribir las cadenas en el string salida */
-	/* strcpy copia el string s1 en output */
-	if (output == NULL)
+	len2 = _strlen(s2);
+
+	if (n > len2)
+	{
+		n = len2;
+	}
+	lenTotal = malloc(sizeof(char) * (len1 + n + 1));
+
+	if (lenTotal == NULL)
 	{
 		return (NULL);
+	}
 
-	}
-	else
+	/*Concatenate*/
+	for (i = 0; s1[i] != '\0'; i++)
 	{
-		output = _strcpy(output, s1);
-		/* strcat une lo copiado en output con s2 */
-		output = _strcatmod(output, s2);
-		return (output);
+		lenTotal[i] = s1[i];
 	}
+	for (j = 0; j < n; j++)
+	{
+		lenTotal[i + j] = s2[j];
+	}
+	lenTotal[i + j] = '\0';
+
+	return (lenTotal);
 }
