@@ -1,10 +1,9 @@
 #include "holberton.h"
 /**
- * main - function main balblabla
- * @var1: balbla
- * @var2: balblab
- *
- * Return: return balblabva
+ * _calloc - allocates memory for an array, using malloc
+ * @nmemb: get a number
+ * @size: get a number
+ * Return: return a pointer or NULL if fails
  */
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
@@ -25,6 +24,7 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 
 	for (i = 0; i < (nmemb * size); i++)
 	{
-		
+		ptr[i] = 0;
 	}
+	return (ptr);
 }
