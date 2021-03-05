@@ -1,65 +1,99 @@
 #include "holberton.h"
-/* */
-int contarletras(char *string)
+/**
+ * wordstotal - counts the number of words in a string.
+ * @str: The string to be counted.
+ *
+ * Return: The total of words of the string.
+ */
+int wordstotal(char *str)
 {
-	int i;
-	
-	for (i = 0; (string[i] != '\0' && string[i] != ' '); i++)
-	{
-	}
-	return (i);
+	int counter_str, words_total;
+
+	counter_str = words_total = 0;
+	for (counter_str = 0; str[counter_str] != '\0'; counter_str++)
+		if (str[counter_str] != ' ' &&
+		    (str[counter_str + 1] == ' ' || str[counter_str + 1] == '\0'))
+			words_total++;
+	return (words_total);
 }
 
 /**
- * *_strncpy - Copy n bytes from source to destiny string.
- * @dest: Destiny string.
- * @src: Source string.
- * @n: Bytes from src string.
- * Return: Destiny string dest.
+ * allocword - allocates memory for the specific word.
+ * @str: The array of the word.
+ * @len: The length of the word.
+ *
+ * Return: The pointer to the resulting array or NULL if failed to
+ *         allocate memory.
  */
-char *_strncpy(char *dest, char *src, int n)
+char *allocword(char *str, int len)
 {
-	int i;
-
-	for (i = 0; i < n && src[i] != '\0'; i++)
-		dest[i] = src[i];
-
-	for (; i < n; i++)
-		dest[i] = '\0';
-	return (dest);
-	
+	str = malloc(sizeof(char) * len);
+	if (str == NULL)
+	{
+		free(str);
+		return (NULL);
+	}
+	return (str);
 }
-/* */
+
+/**
+ * copychars - copies the characters from a word to another array.
+ * @str: The source word.
+ * @cpy: The destination array.
+ * @begin: The beginning position of str.
+ * @len: The length of the word.
+ */
+void copychars(char *str, char *cpy, int begin, int len)
+{
+	int counter;
+
+	counter = 0;
+	for (counter = 0; counter < len - 1; counter++)
+		cpy[counter] = str[begin + counter];
+	cpy[counter] = '\0';
+}
+
+/**
+ * strtow - converts a string into an array of words.
+ * @str: The string to be converted.
+ *
+ * Return: The pointer to the resulting array or NULL if str is NULL or empty
+ *         or if failed to allocate memory.
+ */
 char **strtow(char *str)
 {
-	int i, j, k;
-	char ** ptpalabras;
-	int palabra = 0;
-	int nletras;
+	int words_total, counter_str, counter, word_char, flag, counter_2;
+	char **words;
 
-	/* contar palabras */
-	for (i = 0; str[i] != '\0'; i++)
+	words_total = counter_str = counter = word_char = flag = counter_2 = 0;
+	words = NULL;
+	if (str == NULL || *str == '\0')
+		return (NULL);
+	words_total = wordstotal(str);
+	if (words_total == 0)
+		return (NULL);
+	words = malloc(sizeof(char *) * (words_total + 1));
+	if (words == NULL)
+		return (NULL);
+	for (counter = 0; counter < words_total; counter++)
 	{
-		if (str[i] != ' ' && (str[i + 1] == ' ' || str[i + 1] == '\0'))
+		for (word_char = 0; str[counter_str] != '\0' && flag == 0; counter_str++)
+			if (str[counter_str] != ' ')
+			{
+				word_char++;
+				if (str[counter_str + 1] == ' ' || str[counter_str + 1] == '\0')
+					flag = 1;
+			}
+		words[counter] = allocword(words[counter], word_char + 1);
+		if (words[counter] == NULL)
 		{
-			palabra++;
+			free(words);
+			return (NULL);
 		}
+		copychars(str, words[counter], counter_str - word_char, word_char + 1);
+		counter_str++;
+		flag = 0;
 	}
-	/* contar letras de las palabras */
-	ptpalabras = malloc(sizeof(char *) * palabra);
-	
-	k = 0;
-	/* identificar palabra*/
-	for (j = 0; str[i] != '\0'; j++)
-	{
-		if (str[i] == ' ' && !(str[i + 1] == ' ' || str[i + 1] == '\0'))
-		{
-			nletras = contarletras(str + i + 1);
-			ptpalabras[k] = malloc(sizeof(char) * nletras + 1);
-			_strncpy(ptpalabras[k], str + i + 1, nletras);
-			i = i + nletras;
-			k++;
-		}
-	}
-	return (ptpalabras);
+	words[counter] = '\0';
+	return (words);
 }
