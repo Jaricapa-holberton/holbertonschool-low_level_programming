@@ -54,7 +54,6 @@ int _strlen(char *s)
 		;
 
 	return (c);
-	
 }
 /**
  * _strcpy - copy the string in src to dest
@@ -71,5 +70,4 @@ char *_strcpy(char *dest, char *src)
 		dest[index] = src[index];
 	dest[index] = '\0';
 	return (dest);
-	
 }
