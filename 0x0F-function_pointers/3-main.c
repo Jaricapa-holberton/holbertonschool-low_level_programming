@@ -24,13 +24,11 @@ int main(int argc, char **argv)
 	{
 		printf("Error\n");
 		exit(99);
-		
 	}
 	num2 = atoi(argv[3]);
 	num1 = atoi(argv[1]);
 	res = calculation(num1, num2);
 
-	
 	printf("%d\n", res);
 	return (0);
 }
