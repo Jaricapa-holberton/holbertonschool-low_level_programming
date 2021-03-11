@@ -15,12 +15,12 @@ void print_s(va_list element);
  * @f: Format.
  * @print: Function print.
  */
-typedef struct format_t
+typedef struct get 
 {
 	char *f;
 	void (*print)(va_list);
 	
-} format_t;
+} get_t;
 
 int _putchar(char c);
 int sum_them_all(const unsigned int n, ...);
