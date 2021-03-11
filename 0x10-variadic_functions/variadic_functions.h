@@ -4,23 +4,22 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-void print_c(va_list element);
-void print_i(va_list element);
-void print_f(va_list element);
-void print_s(va_list element);
+void p_c(va_list element);
+void p_i(va_list element);
+void p_f(va_list element);
+void p_s(va_list element);
 
 /**
  * struct format_t - Struct format_t
  *
- * @f: Format.
+ * @format: Format.
  * @print: Function print.
  */
-typedef struct get 
+typedef struct format_t 
 {
 	char *f;
 	void (*print)(va_list);
-	
-} get_t;
+} format_t;
 
 int _putchar(char c);
 int sum_them_all(const unsigned int n, ...);
