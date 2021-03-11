@@ -3,7 +3,7 @@
  * get_op_func - Identify function to use.
  * @s: Charater of operator.
  *
- * Return: A functio.
+ * Return: A function.
  */
 int (*get_op_func(char *s))(int, int)
 {
@@ -17,9 +17,14 @@ int (*get_op_func(char *s))(int, int)
 	};
 	int i;
 
-	for (i = 0; ops[i].ptr != NULL; i++)
+	for (i = 0; ops[i].funsym != NULL; i++)
 	{
-		if ()
+		if (*(ops[i].op) == *s)
+		{
+			return (ops[i].f);
+		}
 	}
+	printf("Error\n");
+	exit(99);
 }
 

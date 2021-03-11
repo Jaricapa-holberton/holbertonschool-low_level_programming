@@ -7,14 +7,16 @@
  */
 int main(ac, **av)
 {
-	int a, b, res;
-	int (*funsym)(int *);
+	int num1, num2, res;
+	char *operator;
+	int (*calculation)(int , int);
 
 	/* Usage: calc num1 operator num2 */
-	a = atoi(av[1]);
-	funsym = get_op_func(av[2]);
-	b = atoi(av[3]);
-	res = funsym(a, b);
+	num1 = atoi(av[1]);
+	operator = av[2];
+	calculation = get_op_func(operator);
+	num2 = atoi(av[3]);
+	res = calculation(num1, num2);
 
 	printf("%d\n", res);
 	return (0);
