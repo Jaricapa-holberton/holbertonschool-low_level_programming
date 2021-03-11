@@ -19,6 +19,7 @@ typedef struct format_t
 {
 	char *f;
 	void (*print)(va_list);
+	
 } format_t;
 
 int _putchar(char c);
