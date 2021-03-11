@@ -1,5 +1,8 @@
 #include "variadic_functions.h"
-
+/**
+ * print_all - Print anything
+ * @format: A list of types of arguments passed to the function.
+ */
 void print_all(const char * const format, ...)
 {
 	va_list element;
@@ -31,7 +34,7 @@ void print_all(const char * const format, ...)
 			}
 			i++;
 		}
-		indexf++;		
+		indexf++;
 	}
 	printf("\n");
 	va_end(element);
@@ -44,7 +47,6 @@ void print_all(const char * const format, ...)
 void p_c(va_list element)
 {
 	printf("%c", va_arg(element, int));
-	
 }
 
 /**
@@ -54,7 +56,6 @@ void p_c(va_list element)
 void p_i(va_list element)
 {
 	printf("%d", va_arg(element, int));
-	
 }
 
 /**
@@ -64,7 +65,6 @@ void p_i(va_list element)
 void p_f(va_list element)
 {
 	printf("%f", va_arg(element, double));
-	
 }
 
 /**
