@@ -12,10 +12,10 @@ void p_s(va_list element);
 /**
  * struct format_t - Struct format_t
  *
- * @format: Format.
+ * @f: Format.
  * @print: Function print.
  */
-typedef struct format_t 
+typedef struct format_t
 {
 	char *f;
 	void (*print)(va_list);
