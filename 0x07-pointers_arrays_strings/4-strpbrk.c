@@ -4,22 +4,17 @@ char *_strpbrk(char *s, char *accept)
 {
 	unsigned int i, j;
 
-	for (i = 0; s[i]; i++)
+	for (i = 0; accept[i]; i++)
 	{
-		for (j = 0; ; j++)
+		for (j = 0; s[j] != '\0'; j++)
 		{
-			if (s[i] != '\0')
-			{
-				if (s[i] == accept[j])
+			if (s[i] == accept[j])
 				{
 					return (&s[i]);
 				}
 			}
-			else
-			{
-				return (NULL);
-			}
 		}
-	}
-	return (&s[i]);
+	return (NULL);	
 }
+
+

@@ -21,7 +21,7 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 	{
 		return (NULL);
 	}
-
+	/* alloc change the data inside the memory block (pointer) to 0*/
 	for (i = 0; i < (nmemb * size); i++)
 	{
 		ptr[i] = 0;
