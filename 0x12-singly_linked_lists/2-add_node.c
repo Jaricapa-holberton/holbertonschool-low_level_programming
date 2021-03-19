@@ -25,30 +25,30 @@ int _strlen(char *s)
 list_t *add_node(list_t **head, const char *str)
 {
 	/* create new node */
-	list_t *new = NULL;
+	list_t *newnode = NULL;
 
 	if (str == NULL)
 	{
 		return (NULL);
 	}
 	/* allocate memory for the new node */
-	new = malloc(sizeof(list_t));
-	if (new == NULL)
+	newnode = malloc(sizeof(list_t));
+	if (newnode == NULL)
 	{
 		return (NULL);
 	}
 	/* make a new node */
-	new->str = strdup(str);
+	newnode->str = strdup(str);
 	/* when strdup fail free the new node */
-	if (new->str == NULL)
+	if (newnode->str == NULL)
 	{
-		free(new);
+		free(newnode);
 		return (NULL);
 	}
 	/* check the length of the str asigned for every node*/
-	new->len = strlen(new->str);
+	newnode->len = strlen(newnode->str);
 	/* change the direction of the head node to the new node */
-	new->next = *head;
-	*head = new;
-	return (new);
+	newnode->next = *head;
+	*head = newnode;
+	return (newnode);
 }
