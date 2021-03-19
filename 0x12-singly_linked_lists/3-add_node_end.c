@@ -22,8 +22,10 @@ int _strlen(char *s)
  */
 list_t *add_node_end(list_t **head, const char *str)
 {
+	int i, l = 0;
 	/* create new node */
-	list_t *newnode = NULL;
+	list_t *newnode = NULL;/*New node at the end*/
+	list_t *cendnode = NULL;/*Currently end node*/
 
 	if (str == NULL)
 	{
@@ -35,18 +37,29 @@ list_t *add_node_end(list_t **head, const char *str)
 	{
 		return (NULL);
 	}
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		l++;
+	}
 	/* make a new node */
 	newnode->str = strdup(str);
-	/* when strdup fail free the new node */
-	if (newnode->str == NULL)
-	{
-		free(newnode);
-		return (NULL);
-	}
 	/* check the length of the str asigned for every node*/
-	newnode->len = strlen(newnode->str);
-	/* change the direction of the head node to the new node */
-	newnode->next = *head;
-	*head = newnode;
+	newnode->len = i;
+	/* prepare the new node, changing the next direction, like as a last node */
+	newnode->next = NULL;
+	/*Found a current last node*/
+	if (*head == NULL)/*If the list are empty*/
+	{
+		*head = newnode;
+		return (newnode);
+	}
+	/* iterate inside the linked list until the actual last node */
+	/* for do that, a node will save the current las direction */
+	for (cendnode = *head; cendnode->next != NULL;)
+	{
+		cendnode = cendnode->next;
+	}
+	/* assing the direction saved in cendnode to the newnode */
+	cendnode->next = newnode;
 	return (newnode);
 }
