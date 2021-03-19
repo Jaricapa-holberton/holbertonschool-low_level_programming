@@ -22,6 +22,7 @@ int _strlen(char *s)
  */
 list_t *add_node(list_t **head, const char *str)
 {
+	int i, l = 0;
 	/* create new node */
 	list_t *newnode = NULL;
 
@@ -35,6 +36,10 @@ list_t *add_node(list_t **head, const char *str)
 	{
 		return (NULL);
 	}
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		l++;
+	}
 	/* make a new node */
 	newnode->str = strdup(str);
 	/* when strdup fail free the new node */
@@ -44,7 +49,7 @@ list_t *add_node(list_t **head, const char *str)
 	/* return (NULL); */
 /* } */
 	/* check the length of the str asigned for every node*/
-	newnode->len = strlen(newnode->str);
+	newnode->len = i;
 	/* change the direction of the head node to the new node */
 	newnode->next = *head;
 	*head = newnode;
