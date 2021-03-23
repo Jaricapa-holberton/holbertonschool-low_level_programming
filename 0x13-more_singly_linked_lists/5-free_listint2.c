@@ -7,6 +7,11 @@ void free_listint2(listint_t **head)
 {
 	/* create a tail node wich get the next direction from the freeded node */
 	listint_t *tailnode = NULL;
+	/* esto lo pide el checker */
+	if (head == NULL)
+	{
+		return;
+	}
 	/* go to every node and free them */
 	/* because of the **head is requred deference the head */
 	/* where deference it?, tailnode get the direction of head */
