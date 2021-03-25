@@ -1,5 +1,19 @@
 #include "holberton.h"
 /**
+ * _strlen - Count the length of a string.
+ * @s: String.
+ * Return: Length.
+ */
+int _strlen(const char *s)
+{
+	int c;
+
+	for (c = 0; s[c]; c++)
+		;
+
+	return (c);
+}
+/**
  * binary_to_uint - Convert a binary number to an unsigned int.
  * @b: Pointer to a string of 0 and 1 chars.
  * Return: The converted number, or 0 if.
@@ -9,7 +23,7 @@ unsigned int binary_to_uint(const char *b)
 	int i, dec_value = 0, base = 1, len;
 
 	/* get the lenght of the string to desplace */
-	len = strlen(b);
+	len = _strlen(b);
 	/* iterate on the string looking for 0 and 1*/
 	for (i = len - 1; i >= 0; i--)
 	{
