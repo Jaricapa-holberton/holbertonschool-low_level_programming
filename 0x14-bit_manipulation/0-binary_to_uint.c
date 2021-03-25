@@ -22,6 +22,10 @@ unsigned int binary_to_uint(const char *b)
 {
 	int i, dec_value = 0, base = 1, len;
 
+	if (b == NULL)
+	{
+		return (0);
+	}
 	/* get the lenght of the string to desplace */
 	len = _strlen(b);
 	/* iterate on the string looking for 0 and 1*/
