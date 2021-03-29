@@ -22,16 +22,12 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	fd = open(filename, O_RDONLY);
 	/* check if the files was open */
 	if (fd == -1)
-	{
 		return (0);
-	}
 	/*Allocate memory*/
 	buffer = malloc(letters * sizeof(char));
 	/* check if the text have content */
 	if (buffer == NULL)
-	{
 		return (0);
-	}
 	/* get the num of chars to read */
 	numchars = read(fd, buffer, letters);
 	/* if read fail */
