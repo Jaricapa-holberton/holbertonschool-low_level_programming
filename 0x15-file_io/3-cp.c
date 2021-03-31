@@ -9,34 +9,35 @@
  */
 int main(int argc, char *argv[])
 {
-	const char *orig, *dest;
+	const char *origin, *dest;
 	char buffer[1024];
-	int f_des_org, f_des_des;
-	ssize_t orig_read_buf;
+	int fdorigin, fddest;
+	ssize_t readbuffersize;
 
 	if (argc != 3)
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n"), exit(97);
 
-	orig = argv[1], dest = argv[2];
-
-	f_des_org = open(orig, O_RDONLY);
-	if (f_des_org == -1)
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", orig), exit(98);
-
-	f_des_des = open(dest, O_CREAT | O_WRONLY | O_TRUNC, 0664);
-
-	while ((orig_read_buf = read(f_des_org, buffer, 1024)) > 0)
-		if (f_des_des == -1 ||
-		    orig_read_buf != write(f_des_des, buffer, orig_read_buf))
+	origin = argv[1], dest = argv[2];
+	/* open src file */
+	fdorigin = open(origin, O_RDONLY);
+	/* check if the origin file is open */
+	if (fdorigin == -1)
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", origin), exit(98);
+	/* open dest file */
+	fddest = open(dest, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	/* read from origin chars as buffer allow */
+	while ((readbuffersize = read(fdorigin, buffer, 1024)) > 0)
+		/* check if can write to dest file */
+		if (fddest == -1 ||
+		    readbuffersize != write(fddest, buffer, readbuffersize))
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", dest), exit(99);
-
-	if (orig_read_buf == -1)
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", orig), exit(98);
-	if (close(f_des_org) == -1)
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", f_des_org), exit(100);
-	if (close(f_des_des) == -1)
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", f_des_des), exit(100);
-
+	/* check if can read from origin */
+	if (readbuffersize == -1)
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", origin), exit(98);
+	/* close the files */
+	if (close(fdorigin) == -1)
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fdorigin), exit(100);
+	if (close(fddest) == -1)
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fddest), exit(100);
 	return (0);
-	
 }
