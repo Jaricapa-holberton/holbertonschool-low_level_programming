@@ -1,63 +1,41 @@
 #include "lists.h"
-
 /**
- * list_len - Return the number of elements in a linked list.
- * @h: Pointer to head of list.
- * Return: The number of elements in a linked list.
- */
-unsigned int list_len(const listint_t *h)
-{
-	unsigned int n_nodes = 0;/*Counter of nodes*/
-
-	if (h == NULL)
-		return (0);
-
-	for (n_nodes = 0; h != NULL; n_nodes++)
-		h = h->next;
-
-	return (n_nodes);
-}
-
-/**
- * delete_nodeint_at_index -  Deletes the node at indicate index
- * of a listint_t linked list.
- * @head: Pointer to pointer head of linked list.
- * @index: Index of node to delete.
+ * delete_dnodeint_at_index - function that inserts a new node at a
+ * given position.
+ * @head: Double pointer with address to head of a double linked list.
+ * @index: The index of the node that should be deleted. Index starts at 0.
  * Return: 1 if it succeeded, -1 if it failed.
  */
-int delete_nodeint_at_index(listint_t **head, unsigned int index)
+int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
-	listint_t *prev_node = *head;
-	listint_t *tail = NULL;
-	unsigned int size, i;
+	dlistint_t *copy;
+	unsigned int position;
 
-	size = list_len(prev_node);
-
-	if (index >= size)
-		return (-1);
-
-	/*Delete node*/
-
-	/*Case: Delate the first position*/
-	if (index == 0)
+	copy = *head;
+	for (position = 0; copy; position++, copy = copy->next)
 	{
-		tail = (*head)->next;
-		free(*head);
-		*head = tail;
-		return (1);
+		if (position == index)
+		{
+			if (position == 0) /*Head node*/
+			{
+				if (copy->next != NULL)
+				{
+					*head = copy->next;
+					(copy->next)->prev = NULL;
+				}
+				else
+					*head = NULL;
+			}
+			else if (copy->next == NULL && copy->prev) /*Tail node*/
+				(copy->prev)->next = NULL;
+			else
+			{
+				(copy->prev)->next = copy->next;
+				(copy->next)->prev = copy->prev;
+			}
+			free(copy);
+			return (1);
+		}
 	}
-
-	/*Generic case*/
-
-	/*--Identify previus node*/
-	prev_node = *head;
-	for (i = 0; i < (index - 1); i++)
-		prev_node = prev_node->next;
-
-	/*--Identify tail*/
-	tail = (prev_node->next)->next;
-	free(prev_node->next);
-	prev_node->next = tail;
-
-	return (1);
+	return (-1);
 }
