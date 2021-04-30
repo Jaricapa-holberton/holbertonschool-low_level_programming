@@ -1,14 +1,14 @@
 #include "lists.h"
 /**
- * free_listint - Free a listint_t list.
+ * free_dlistint - Free a listint_t list.
  * @head: Head of linked listint_t list.
  */
-void free_listint(listint_t *head)
+void free_dlistint(dlistint_t *head)
 {
 	/* create a tail node wich get the next direction from the freeded node */
-	listint_t *tailnode = NULL;
+	dlistint_t *tailnode = head;
 	/* go to every node and free them */
-	for (; head != NULL;)
+	for (; head;)
 	{
 		/* the tail get the direction of the next node */
 		tailnode = head->next;
