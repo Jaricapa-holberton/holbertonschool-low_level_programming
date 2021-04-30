@@ -1,36 +1,35 @@
 #include "lists.h"
 /**
- * add_nodeint_end - Add a new node at the end of a listint_t list.
+ * add_dnodeint_end - Add a new node at the end of a listint_t list.
  * @head: Pointer to pointer head of the linked list.
  * @n: Integer number of the node to add.
  * Return: The address of the new element.
  */
-listint_t *add_nodeint_end(listint_t **head, const int n)
+dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 {
-	listint_t *newnode = NULL;/*New node at the end*/
-	listint_t *cendnode = NULL;/*Currently end node*/
+	dlistint_t *newnode = NULL;/*New node at the end*/
+	dlistint_t *cendnode = NULL;/*Currently end node*/
 
 	/* allocate memory for the new node */
-	newnode = malloc(sizeof(listint_t));
+	newnode = malloc(sizeof(dlistint_t));
+	/* check if fail to allocate */
 	if (newnode == NULL)
-	{
 		return (NULL);
-	}
 	/* asing values for the new node */
 	newnode->n = n;
 	newnode->next = NULL;
+	newnode->prev = NULL;
 	/* in case there no exits another nodes */
 	if (*head == NULL)
 	{
 		*head = newnode;
 		return (newnode);
 	}
-	/* find the current last node */
-	for (cendnode = *head; cendnode->next != NULL;)
-	{
+	/* iterate as long as a node exists */
+	for (cendnode = *head; cendnode->next;)
 		cendnode = cendnode->next;
-	}
 	/* update the poiting direction of the current last node to the new node */
+	newnode->prev = cendnode;
 	cendnode->next = newnode;
 	return (cendnode);
 }
