@@ -1,52 +1,41 @@
 #include "lists.h"
+
 /**
- * insert_nodeint_at_index - Returns the new node inserted at a given index,
- * or NULL if index non-existent or failed to allocate memory.
- * @head: The list's head.
- * @idx: The index of the node to be inserted.
- * @n: The data of the node (a number).
- * Return: The new node inserted at index "idx" or NULL if idx non-existent or
- * failed to allocate memory.
+ * insert_dnodeint_at_index - Function that inserts a newnode node at a
+ * given posnode.
+ * @h: Double pointer with address to head of a double linked list.
+ * @idx: The index of the list where the newnode node should be added. Starts at 0.
+ * @n: Content of the newnode node.
+ * Return: The address of the newnode node, or NULL if it failed.
  */
-listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
+dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-	/* create a counter to compare position with the index */
-	unsigned int counter;
+	dlistint_t *newnode = NULL;
+	dlistint_t *temp;
+	unsigned int posnode = 0;
 
-	/* create nodes to do a new node and compare the position */
-	listint_t *newnode, *cnode;
-
-	/* alloc memory for the new node */
-	newnode = malloc(sizeof(*newnode));
-	/* check if exists memory for the new node*/
-	if (newnode == NULL)
-		return (NULL);
-	/* update the value of n in the new node */
-	newnode->n = n;
-	/* check if the index is 0 to make that node as the first node */
-	if (idx == 0)
+	temp = *h;
+	for (posnode = 0; temp || posnode == 0; posnode++, temp = temp->next)
 	{
-		newnode->next = *head;
-		*head = newnode;
-		return (newnode);
-	}
-	/* save the values of the current node from head */
-	cnode = *head;
-	/* run inside the list to find the desired index */
-	for (counter = 0; counter < idx - 1; counter++)
-	{
-		/* if fails */
-		if (cnode == NULL)
+		if (posnode == idx)
 		{
-			free(newnode);
-			return (NULL);
+			if (posnode == 0) /* Head posnode */
+				newnode = add_dnodeint(&(*h), n);
+			else /* maybe medium posnode */
+			{
+				newnode = malloc(sizeof(dlistint_t));
+				if (!newnode)
+					return (NULL);
+				newnode->n = n;
+				(temp->prev)->next = newnode;
+				newnode->prev = temp->prev;
+				newnode->next = temp;
+				temp->prev = newnode;
+			}
+			return (newnode);
 		}
-		/* point the direction of the next node in the current node */
-		cnode = cnode->next;
 	}
-	/* point to the direction of the new node to the current node */
-	newnode->next = cnode->next;
-	/* point to the direction of the current node to the next node */
-	cnode->next = newnode;
-	return (newnode);
+	if (posnode == idx) /* Tail posnode */
+		return (add_dnodeint_end(&(*h), n));
+	return (NULL);
 }
