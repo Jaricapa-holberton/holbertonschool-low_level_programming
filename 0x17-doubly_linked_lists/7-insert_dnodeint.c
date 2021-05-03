@@ -4,7 +4,7 @@
  * insert_dnodeint_at_index - Function that inserts a newnode node at a
  * given posnode.
  * @h: Double pointer with address to head of a double linked list.
- * @idx: The index of the list where the newnode node should be added. Starts at 0.
+ * @idx: The index of the list where the newnode node should be added.
  * @n: Content of the newnode node.
  * Return: The address of the newnode node, or NULL if it failed.
  */
