@@ -1,41 +1,42 @@
 #include "lists.h"
-
 /**
- * insert_dnodeint_at_index - Function that inserts a newnode node at a
- * given posnode.
- * @h: Double pointer with address to head of a double linked list.
- * @idx: The index of the list where the newnode node should be added.
- * @n: Content of the newnode node.
- * Return: The address of the newnode node, or NULL if it failed.
+ * insert_dnodeint_at_index - Inserts a new node at a given position.
+ * @h: Pointer to head of the list.
+ * @idx: Index to insert.
+ * @n: New data.
+ * Return: The address of the new node.
  */
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-	dlistint_t *newnode = NULL;
-	dlistint_t *temp;
-	unsigned int posnode = 0;
+	dlistint_t *new = NULL;
+	dlistint_t *prv_posit = *h;
 
-	temp = *h;
-	for (posnode = 0; temp || posnode == 0; posnode++, temp = temp->next)
+	/*Add at the start position*/
+	if (!idx)
+		return (add_dnodeint(h, n));
+
+	/*Find prev position*/
+	for (; idx > 1; idx--)
 	{
-		if (posnode == idx)
-		{
-			if (posnode == 0) /* Head posnode */
-				newnode = add_dnodeint(&(*h), n);
-			else /* maybe medium posnode */
-			{
-				newnode = malloc(sizeof(dlistint_t));
-				if (!newnode)
-					return (NULL);
-				newnode->n = n;
-				(temp->prev)->next = newnode;
-				newnode->prev = temp->prev;
-				newnode->next = temp;
-				temp->prev = newnode;
-			}
-			return (newnode);
-		}
+		prv_posit = prv_posit->next;
+		if (!prv_posit)
+			return (NULL);
 	}
-	if (posnode == idx) /* Tail posnode */
-		return (add_dnodeint_end(&(*h), n));
-	return (NULL);
+
+	/*Add in the last position*/
+	if (!(prv_posit->next))
+		return (add_dnodeint_end(h, n));
+
+	/*Add in middle position*/
+	/*Create new node*/
+	new = malloc(sizeof(dlistint_t));
+	if (!new)
+		return (NULL);
+
+	new->n = n;
+	new->prev = prv_posit;
+	new->next = prv_posit->next;
+	prv_posit->next->prev = new;
+	prv_posit->next = new;
+	return (new);
 }
