@@ -1,0 +1,13 @@
+task 0:
+
+    Test succes:
+
+    entra un numero entero positivo no mas grande que un unsigned long int
+
+    Test error:
+
+    * size es cero
+    * size no es un numero entero positivo
+    * no hay memoria para hacer malloc
+
+task 1:
