@@ -6,13 +6,12 @@
  */
 hash_table_t *hash_table_create(unsigned long int size)
 {
-	hash_table_t *hashtable = NULL;
-	unsigned long int i; /* to iterate the array */
+	hash_table_t *hashtable = malloc(sizeof(hash_table_t));
+	unsigned int i; /* to iterate the array */
 
-	/* create hash table */
-	hashtable = malloc(sizeof(hash_table_t));
+	/* check if the table was created */
 	if (!hashtable)
-		return (0);
+		return (NULL);
 
 	/* now, create the array to save the data */
 	hashtable->size = size;
@@ -20,7 +19,7 @@ hash_table_t *hash_table_create(unsigned long int size)
 	if (!hashtable->array)
 	{
 		free(hashtable);
-		return (0);
+		return (NULL);
 	}
 	/* finnaly, initialize the array whith all elements as null */
 	for (i = 0; i < size; i++)
