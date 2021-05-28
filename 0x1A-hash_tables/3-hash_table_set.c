@@ -44,7 +44,9 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	hash_node_t *temp_head_node;
 	char *duply_value;
 	/* check if parameters are wrong */
-	if (!ht || !key || *key == '\0' || !value)
+	if ((!ht) || (!key) || (!value))
+		return (0);
+	if (*key == '\0')
 		return (0);
 	/*Copy value*/
 	duply_value = strdup(value);
