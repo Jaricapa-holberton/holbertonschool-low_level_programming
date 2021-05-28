@@ -12,21 +12,18 @@ void hash_table_print(const hash_table_t *ht)
 
 	if (!ht)
 		return;
-	else
+
+	/* open the list */
+	printf("{");
+	/* show the content of the list */
+	for (i = 0; i < ht->size; i++)
 	{
-        /* open the list */
-		printf("{");
-        /* show the content of the list */
-		for (i = 0; i < ht->size; i++)
+		head = ht->array[i];
+		for (; head; head = head->next)
 		{
-			head = ht->array[i];
-			for (; head; head = head->next)
-			{
-				printf("%s'%s': '%s'", separator, head->key, head->value);
-				separator = ", ";
-			}
+			printf("%s'%s': '%s'", separator, head->key, head->value);
+			separator = ", ";
 		}
-		printf("}\n");
 	}
-    return;
+	printf("}\n");
 }
